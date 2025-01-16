@@ -10,7 +10,7 @@ public class PLayer : MonoBehaviour
     float horizontal;
     float vertical;
     public float Speed;
-    
+    public Joystick joystick;
     void Update()
     {
         Moving();
@@ -19,12 +19,20 @@ public class PLayer : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+
+        horizontal = joystick.Horizontal;
+        vertical = joystick.Vertical;
+
         Vector3 direction = new Vector3(horizontal, 0, vertical); // Horizontal and Vertical map to X and Z
         transform.Translate(direction * Time.deltaTime*Speed);
 
     }
 
     private void CheckWall()
+    {
+
+    }
+    private void Eatbrick()
     {
 
     }
