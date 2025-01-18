@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4319652063371167752}
   m_Layer: 0
   m_Name: Cube 2
-  m_TagString: Untagged
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  numberOfBricks: 50
-  spacing: 1.5
-  heightOffset: 5
+  r1: 1
+  listBrick: []
