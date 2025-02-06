@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EatBrick : MonoBehaviour
+public class tesMap : MonoBehaviour
 {
-  
+ 
+    void Update()
+    {
+        
+    }
 }
