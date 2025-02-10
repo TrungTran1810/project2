@@ -84,7 +84,6 @@ public class MapWord : MonoBehaviour
                 //Instantiate(listBrick[i * 10 + j], new Vector3(i, 0.1f, j), Quaternion.identity, this.transform);
                 GameObject a = Instantiate(listBrick[i * 10 + j]);
                 a.transform.localPosition = new Vector3(i - (r1 * 5) + 0.5f, 0.1f, j - (r1 * 5) + 0.5f);
-               
                 a.transform.parent = gameObject.transform;
                 a.transform.localScale = new Vector3(0.3f, 0.2f, 0.2f);
 
