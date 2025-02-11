@@ -11,24 +11,24 @@ public class PLayer : MonoBehaviour
     public float Speed;
     public Joystick joystick;
     private List<GameObject> Addbrick = new List<GameObject>();
-    public GameObject AddbrickPrefab;
+    public GameObject AddbrickPrefab;   
     public Transform player;
     private Vector3 Player;
     public Material mas;
     [SerializeField] private GameObject Wall;
     private HashSet<GameObject> passedBricks = new HashSet<GameObject>(); // Lưu gạch đã đi qua
-    [SerializeField] private LayerMask groundLayer;
-    bool isGrounded;
+    
+    private bool isBlockedForward=false;    
+
+
     void Update()
     {
         Moving();
 
     }
-    //private void FixedUpdate()
-    //{
-    //    CheckGround();
-    //}
+  
     private void Moving()
+      
     {
 
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -38,20 +38,18 @@ public class PLayer : MonoBehaviour
         vertical = joystick.Vertical;
 
         Vector3 direction = new Vector3(-horizontal, 0, -vertical);
+        //if (isBlockedForward && direction.z > 0)
+        //{
+        //    Debug.Log("Không thể tiến lên vì bị chặn!");
+        //    return;
+        //}
         transform.Translate(direction * Time.deltaTime * Speed);
+        
 
     }
-    private void CheckGround()
-    {
-        Ray ray = new Ray(transform.position, Vector3.down);
-        Debug.DrawRay(Player, Vector3.down, Color.red, 10f);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1f, groundLayer))
-        {
-            Debug.Log("on Ground");
-            isGrounded = true;
-        }
 
-    }
+ 
+  
 
 
     private void EatBrick()
@@ -73,11 +71,8 @@ public class PLayer : MonoBehaviour
         newBrick.transform.localPosition = new Vector3(0.7f, (+0.6f * Addbrick.Count), 0);
         newBrick.transform.localScale = new Vector3(1f, 0.5f, 1f);
 
-        if (Addbrick.Count > 0)
-        {
-            // Debug.Log("Có gạch, mở đường!");
-            Wall.SetActive(false);
-        }
+        isBlockedForward = false;
+        Debug.Log("Nhặt gạch - mở khóa di chuyển!");
     }
 
     private void LostBrick(GameObject brickObject)
@@ -87,7 +82,7 @@ public class PLayer : MonoBehaviour
         {
 
             Ray ray = new Ray(Player, Vector3.down);
-            Debug.DrawRay(Player, Vector3.down, Color.red, 10f);
+            //Debug.DrawRay(Player, Vector3.down, Color.red, 10f);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
             {
                 // Debug.Log("Raycast trúng: " + hit.transform.name);
@@ -103,55 +98,12 @@ public class PLayer : MonoBehaviour
                     Destroy(lastBrick);
                 }
                 passedBricks.Add(brickObject);
-
-                // Nếu không còn gạch, chặn di chuyển
-                if (Addbrick.Count == 0)
-                {
-                    //Debug.Log("Hết gạch, chặn Player!");
-                    Wall.SetActive(true);
-                }
             }
+
+
         }
     }
-    //private void LostBrick()
-    //{
-    //    Player = player.position;
-
-    //    if (Addbrick.Count > 0)
-    //    {
-    //        Ray ray = new Ray(Player, Vector3.down);
-    //        Debug.DrawRay(Player, Vector3.down, Color.red, 10f);
-
-    //        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
-    //        {
-    //            Brick brick = hit.transform.GetComponent<Brick>();
-
-    //            // Nếu không tìm thấy Brick hoặc không phải Lostbrick, không làm gì cả
-    //            if (brick == null || brick.GetData() != BrickType.Lostbrick)
-    //            {
-    //                return;
-    //            }
-
-    //            // Nếu có gạch, trừ 1 viên
-    //            if (Addbrick.Count > 0)
-    //            {
-    //                GameObject lastBrick = Addbrick[Addbrick.Count - 1];
-    //                Addbrick.RemoveAt(Addbrick.Count - 1);
-    //                Destroy(lastBrick);
-    //                Debug.Log("Mất 1 viên gạch!");
-    //            }
-
-    //            // Nếu không còn gạch, chặn di chuyển
-    //            if (Addbrick.Count == 0)
-    //            {
-    //                Debug.Log("Hết gạch, chặn Player!");
-    //                Wall.SetActive(true);
-    //            }
-    //        }
-    //    }
-
-
-    //}
+    
 
 
 
@@ -176,6 +128,8 @@ public class PLayer : MonoBehaviour
             return;
 
         }
+
+
         if (other.gameObject.tag == "MyBrick")
         {
 
@@ -184,19 +138,38 @@ public class PLayer : MonoBehaviour
 
 
         }
+        
 
 
     }
-
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        
+        // Check Block Bridge
+        Player = player.position;
+
+        if (collision.gameObject.CompareTag("Bridge")) // Kiểm tra đối tượng va chạm
         {
-            Debug.Log("cham ground");
-            isGrounded = true;
+            Vector3 ray = transform.position + new Vector3(0, 1.5f, 1f);
+            
+            if (Physics.Raycast(ray, Vector3.down, out RaycastHit hit, Mathf.Infinity))
+            {
+                //  Debug.Log("Đã đi trên cầu");
+                if (Addbrick.Count == 0)
+                { 
+                    Debug.Log("chạy vào đây chưa ! ");
+                    
+                    isBlockedForward = false;
+                }
+               
+            }
+
+            
         }
     }
+
+
+
 
 
 

@@ -11,10 +11,12 @@ public class Brick : MonoBehaviour
     {
         return brickType;
     }
+   
 }
 public enum BrickType
 {
-   Lostbrick
+    Lostbrick
 }
-   
+
+
 
