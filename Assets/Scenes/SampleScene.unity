@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 44898f7c14606ef459427f0ddc49799b, type: 2}
 --- !u!4 &5973773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1748294790416158264, guid: 3416a9952b34a664d867eea24ea4341a, type: 3}
@@ -4252,7 +4252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 757260645371288335, guid: e2b6ce77d6b66b4418066a2f707cfd69, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1001518339427599175, guid: e2b6ce77d6b66b4418066a2f707cfd69, type: 3}
       propertyPath: m_LocalScale.x
@@ -8180,10 +8180,10 @@ GameObject:
   - component: {fileID: 2019916495}
   m_Layer: 6
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &2019916491
 MeshCollider:
