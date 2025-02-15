@@ -4291,6 +4291,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4543952881312813266, guid: 7294b1cd7d20e934288fff5e5ac5b9f0, type: 3}
     - target: {fileID: 2056753333597271108, guid: e2b6ce77d6b66b4418066a2f707cfd69, type: 3}
+      propertyPath: BrickLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2056753333597271108, guid: e2b6ce77d6b66b4418066a2f707cfd69, type: 3}
+      propertyPath: BridgeLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2056753333597271108, guid: e2b6ce77d6b66b4418066a2f707cfd69, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
@@ -7513,7 +7521,7 @@ GameObject:
   - component: {fileID: 1947190016}
   - component: {fileID: 1947190015}
   - component: {fileID: 1947190014}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Bridge
   m_Icon: {fileID: 0}

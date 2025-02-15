@@ -19,15 +19,15 @@ public class PLayer : MonoBehaviour
     private HashSet<GameObject> passedBricks = new HashSet<GameObject>(); // Lưu gạch đã đi qua
     public GameObject Wall;
     //private bool isBlockedForward = false;
-   //private bool isOnBridge = false; // Kiểm tra có đang trên cầu không
+    private bool isOnBridge = false; // Kiểm tra có đang trên cầu không
     void Start()
     {
-
+        
     }
     void Update()
     {
         Moving();
-
+        //Blockbrick();
 
     }
 
@@ -42,7 +42,7 @@ public class PLayer : MonoBehaviour
         vertical = joystick.Vertical;
 
         Vector3 direction = new Vector3(-horizontal, 0, -vertical);
-        Vector3 checkposition = player.position + direction * 0.6f;
+        //Vector3 checkposition = player.position + direction * 0.6f;
 
         transform.Translate(direction * Time.deltaTime * Speed);
 
@@ -85,7 +85,7 @@ public class PLayer : MonoBehaviour
             //Debug.DrawRay(Player, Vector3.down, Color.red, 10f);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
             {
-                // Debug.Log("Raycast trúng: " + hit.transform.name);
+               
                 Brick brick = hit.transform.GetComponent<Brick>();
                 if (brick == null)
                 {
@@ -103,14 +103,38 @@ public class PLayer : MonoBehaviour
 
     }
 
-    //private bool BlockPlayer()
+    //private void Blockbrick()
     //{
+    //    //brickOnbridge BoB = transform.GetComponent<brickOnbridge>();
+    //    //if (BoB == null)
+    //    //{
+    //    //    return;
+    //    //}
+    //    ////if(BoB.GetBrick()== BrickOnBridgeType.Brick1|| BoB.GetBrick() == BrickOnBridgeType.Brick2|| BoB.GetBrick() == BrickOnBridgeType.Brick3|| BoB.GetBrick() == BrickOnBridgeType.Brick4|| BoB.GetBrick() == BrickOnBridgeType.Brick5|| BoB.GetBrick() == BrickOnBridgeType.Brick6)
+    //    ////{
 
-    //    Player = player.position;
-    //    Ray ray = new Ray(Player, Vector3.down);
-    //    Debug.DrawRay(Player, Vector3.down, Color.yellow, 10f);
-    //    return Physics.Raycast(ray, 1.5f);
+    //    ////}
+    //    //if (BoB.GetBrick() == BrickOnBridgeType.Brick1 || BoB.GetBrick() == BrickOnBridgeType.Brick2)
+    //    //{
+    //    //    Collider BrickCollider = BoB.GetComponent<Collider>();
+
+    //    //    if (Addbrick.Count == 0 && isOnBridge == true)
+    //    //    {
+                
+    //    //        BrickCollider.enabled = false;
+    //    //    }
+
+    //    //}
     //}
+    void Block(GameObject Wall)
+    {
+        BoxCollider block=Wall.GetComponent<BoxCollider>();
+        if(block != null)
+        {
+            block.enabled = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -140,20 +164,22 @@ public class PLayer : MonoBehaviour
                 LostBrick(other.gameObject);
             }
 
-
-            if (Addbrick.Count == 0)
-            {
-               return ;
-            }
-
-
         }
 
-
-
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            if (Addbrick.Count > 0)
+            {
+                Block(collision.gameObject);
+            }
+        }
+      
     }
 
-  
+
 
 
 

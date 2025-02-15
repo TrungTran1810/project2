@@ -14,11 +14,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - groundLayer
+  - BridgeLayer
   - Water
   - UI
   - Ground
-  - 
+  - BrickLayer
   - 
   - 
   - 
