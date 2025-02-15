@@ -18,8 +18,8 @@ public class PLayer : MonoBehaviour
     private LayerMask BridgeLayer;
     private HashSet<GameObject> passedBricks = new HashSet<GameObject>(); // Lưu gạch đã đi qua
     public GameObject Wall;
-    //private bool isBlockedForward = false;
-    private bool isOnBridge = false; // Kiểm tra có đang trên cầu không
+  
+    
     void Start()
     {
         
@@ -134,7 +134,7 @@ public class PLayer : MonoBehaviour
             block.enabled = false;
         }
     }
-
+   
     private void OnTriggerEnter(Collider other)
     {
 
@@ -143,11 +143,13 @@ public class PLayer : MonoBehaviour
 
             EatBrick();
             Destroy(other.gameObject);
+            
 
             //Invoke("EatBrick", 5f);
 
 
         }
+        
 
         else if (other.gameObject.tag == null)
         {
