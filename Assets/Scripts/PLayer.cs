@@ -10,13 +10,13 @@ public class PLayer : MonoBehaviour
     float vertical;
     public float Speed;
     public Joystick joystick;
-    private List<GameObject> Addbrick = new List<GameObject>();
+    protected List<GameObject> Addbrick = new List<GameObject>();
     public GameObject AddbrickPrefab;
     public Transform player;
-    private Vector3 Player;
+    protected Vector3 Player;
     public Material mas;
     private LayerMask BridgeLayer;
-    private HashSet<GameObject> passedBricks = new HashSet<GameObject>(); // Lưu gạch đã đi qua
+    protected HashSet<GameObject> passedBricks = new HashSet<GameObject>(); // Lưu gạch đã đi qua
     public GameObject Wall;
   
     
@@ -53,15 +53,39 @@ public class PLayer : MonoBehaviour
     }
 
 
-    private void EatBrick()
+    //protected void EatBrick()
+    //{
+    //    Vector3 newPosition;
+    //    if (Addbrick.Count == 0)
+    //    {
+    //        newPosition = player.position - player.up * 0.3f;
+    //    }
+    //    else
+    //    {                         //lay vien gach cuôi 
+    //        newPosition = Addbrick[Addbrick.Count - 1].transform.position - player.right * 0.3f;
+    //    }
+
+    //    GameObject newBrick = Instantiate(AddbrickPrefab, newPosition, Quaternion.identity);
+    //    Addbrick.Add(newBrick);
+
+    //    newBrick.transform.SetParent(transform);
+    //    newBrick.transform.localPosition = new Vector3(0.7f, (+0.6f * Addbrick.Count), 0);
+    //    newBrick.transform.localScale = new Vector3(1f, 0.5f, 1f);
+
+
+    //}
+    protected void EatBrick()
     {
+        if (Addbrick.Count >= 5)
+            return; // Nếu đã có 5 viên thì không ăn nữa
+
         Vector3 newPosition;
         if (Addbrick.Count == 0)
         {
             newPosition = player.position - player.up * 0.3f;
         }
         else
-        {                         //lay vien gach cuôi 
+        {
             newPosition = Addbrick[Addbrick.Count - 1].transform.position - player.right * 0.3f;
         }
 
@@ -71,11 +95,11 @@ public class PLayer : MonoBehaviour
         newBrick.transform.SetParent(transform);
         newBrick.transform.localPosition = new Vector3(0.7f, (+0.6f * Addbrick.Count), 0);
         newBrick.transform.localScale = new Vector3(1f, 0.5f, 1f);
-
-
     }
 
-    private void LostBrick(GameObject brickObject)
+
+
+    protected void LostBrick( GameObject brickObject)
     {
         Player = player.position;
         if (Addbrick.Count > 0 && !passedBricks.Contains(brickObject))
@@ -103,30 +127,8 @@ public class PLayer : MonoBehaviour
 
     }
 
-    //private void Blockbrick()
-    //{
-    //    //brickOnbridge BoB = transform.GetComponent<brickOnbridge>();
-    //    //if (BoB == null)
-    //    //{
-    //    //    return;
-    //    //}
-    //    ////if(BoB.GetBrick()== BrickOnBridgeType.Brick1|| BoB.GetBrick() == BrickOnBridgeType.Brick2|| BoB.GetBrick() == BrickOnBridgeType.Brick3|| BoB.GetBrick() == BrickOnBridgeType.Brick4|| BoB.GetBrick() == BrickOnBridgeType.Brick5|| BoB.GetBrick() == BrickOnBridgeType.Brick6)
-    //    ////{
-
-    //    ////}
-    //    //if (BoB.GetBrick() == BrickOnBridgeType.Brick1 || BoB.GetBrick() == BrickOnBridgeType.Brick2)
-    //    //{
-    //    //    Collider BrickCollider = BoB.GetComponent<Collider>();
-
-    //    //    if (Addbrick.Count == 0 && isOnBridge == true)
-    //    //    {
-                
-    //    //        BrickCollider.enabled = false;
-    //    //    }
-
-    //    //}
-    //}
-    void Block(GameObject Wall)
+ 
+    protected void Block(GameObject Wall)
     {
         BoxCollider block=Wall.GetComponent<BoxCollider>();
         if(block != null)
@@ -134,8 +136,18 @@ public class PLayer : MonoBehaviour
             block.enabled = false;
         }
     }
-   
-    private void OnTriggerEnter(Collider other)
+     protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            if (Addbrick.Count > 0)
+            {
+                Block(collision.gameObject);
+            }
+        }
+
+    }
+    protected virtual void OnTriggerEnter(Collider other)
     {
 
         if (other.gameObject.tag == "Green")
@@ -169,24 +181,7 @@ public class PLayer : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            if (Addbrick.Count > 0)
-            {
-                Block(collision.gameObject);
-            }
-        }
-      
-    }
-
-
-
-
-
-
-
+  
 }
 
 

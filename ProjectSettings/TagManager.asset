@@ -10,6 +10,7 @@ TagManager:
   - Bridge
   - MyBrick
   - lostbrick
+  - Black
   layers:
   - Default
   - TransparentFX
