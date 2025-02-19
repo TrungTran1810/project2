@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 3
     agentTypeID: 0
-    agentRadius: 0.1
+    agentRadius: 0.5
     agentHeight: 2
     agentSlope: 60
     agentClimb: 2
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.033333335
+    cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
     buildHeightMesh: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 44898f7c14606ef459427f0ddc49799b, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!4 &5973773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1748294790416158264, guid: 3416a9952b34a664d867eea24ea4341a, type: 3}
@@ -383,7 +383,7 @@ MonoBehaviour:
   player: {fileID: 86775460}
   mas: {fileID: 2100000, guid: a4a2a148bde36db439f4da654906df33, type: 2}
   Wall: {fileID: 4543952881312813266, guid: 7294b1cd7d20e934288fff5e5ac5b9f0, type: 3}
-  targer: {fileID: 0}
+  targer: {fileID: 108080359}
 --- !u!195 &86775456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7370,7 +7370,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: db939dd17b4657647a84d9ac23ecf5f3, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1620776974 stripped
 Transform:
@@ -9177,7 +9177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947190012}
   m_LocalRotation: {x: 0, y: 0, z: -0.21643952, w: 0.97629607}
-  m_LocalPosition: {x: -9.0064, y: 2.1431, z: -1.13}
+  m_LocalPosition: {x: -9.01, y: 2.1431, z: -1.39}
   m_LocalScale: {x: 1.5913533, y: 1, z: 0.1511584}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9227,7 +9227,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

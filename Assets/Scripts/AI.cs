@@ -12,7 +12,7 @@ public class AI : PLayer
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        FindNearsBrick();
+        //FindNearsBrick();
     }
 
     // Update is called once per frame
@@ -20,36 +20,65 @@ public class AI : PLayer
     {
         if (agent != null && agent.isOnNavMesh)
         {
-            //agent.SetDestination(targer.position);
-            FindNearsBrick();
+            agent.SetDestination(targer.position);
+           //FindNearsBrick();
         }
     }
-    void FindNearsBrick()
-    {
-        GameObject[] bricks = GameObject.FindGameObjectsWithTag("Black"); // Tìm tất cả gạch trên bản đồ
-        GameObject nearestBrick = null;
-        float minDistance = Mathf.Infinity;
+    //void FindNearsBrick()
+    //{
+    //    GameObject[] bricks = GameObject.FindGameObjectsWithTag("Black"); // Tìm tất cả gạch trên bản đồ
+    //    GameObject nearestBrick = null;
+    //    float minDistance = Mathf.Infinity;
 
-        foreach (GameObject brick in bricks)
-        {
-            float distance = Vector3.Distance(transform.position, brick.transform.position);
-            if (distance < minDistance && distance <= searchRadius)
-            {
-                minDistance = distance;
-                nearestBrick = brick;
-            }
-        }
+    //    foreach (GameObject brick in bricks)
+    //    {
+    //        float distance = Vector3.Distance(transform.position, brick.transform.position);
+    //        if (distance < minDistance && distance <= searchRadius)
+    //        {
+    //            minDistance = distance;
+    //            nearestBrick = brick;
+    //        }
+    //    }
 
-        if (nearestBrick != null)
-        {
-            agent.SetDestination(nearestBrick.transform.position);
-        }
+    //    if (nearestBrick != null)
+    //    {
+    //        agent.SetDestination(nearestBrick.transform.position);
+    //    }
 
-    }
-    protected void BlockAI(GameObject Wall)
-    {
-        Block(Wall);
-    }
+    //}
+    //protected void BlockAI(GameObject Wall)
+    //{
+    //    Debug.Log("vao day");
+    //    Block(Wall);
+    //}
+
+    //void BlockAI()
+    //{
+
+    //}
+    //protected void Block(GameObject Wall)
+    //{
+       
+    //    BoxCollider block = Wall.GetComponent<BoxCollider>();
+    //    if (block != null) 
+    //    {
+           
+    //        block.enabled = false;
+    //    }
+    //}
+    //protected  void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Wall"))
+    //    {
+           
+    //        if (Addbrick.Count > 0)
+    //        {
+    //            Debug.Log("1");
+    //            Block(collision.gameObject);
+    //        }
+    //    }
+
+    //}
     protected void EatBrickAI()
     {
         EatBrick();
@@ -73,7 +102,7 @@ public class AI : PLayer
                 Addbrick.Remove(other.gameObject);
             }
             Destroy(other.gameObject);
-            FindNearsBrick();
+            //FindNearsBrick();
         }
 
 
@@ -94,17 +123,17 @@ public class AI : PLayer
         }
 
     }
-      protected override void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            if (Addbrick.Count > 0)
-            {
-                Block(collision.gameObject);
-            }
-        }
+    //  protected override void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Wall"))
+    //    {
+    //        if (Addbrick.Count > 0)
+    //        {
+    //            Block(collision.gameObject);
+    //        }
+    //    }
 
-    }
+    //}
 
 }
 

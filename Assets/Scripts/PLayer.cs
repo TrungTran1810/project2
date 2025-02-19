@@ -74,7 +74,7 @@ public class PLayer : MonoBehaviour
 
 
     //}
-    protected void EatBrick()
+    protected virtual void EatBrick()
     {
         if (Addbrick.Count >= 5)
             return; // Nếu đã có 5 viên thì không ăn nữa
@@ -136,7 +136,7 @@ public class PLayer : MonoBehaviour
             block.enabled = false;
         }
     }
-     protected virtual void OnCollisionEnter(Collision collision)
+     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
