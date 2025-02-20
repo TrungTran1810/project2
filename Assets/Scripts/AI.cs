@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AI : PLayer
+public class AI : MonoBehaviour
 {
     private NavMeshAgent agent;
     public Transform targer;
@@ -18,11 +18,12 @@ public class AI : PLayer
     // Update is called once per frame
     void Update()
     {
-        if (agent != null && agent.isOnNavMesh)
-        {
-            agent.SetDestination(targer.position);
-           //FindNearsBrick();
-        }
+        //if (agent != null && agent.isOnNavMesh)
+        //{
+        //    agent.SetDestination(targer.position);
+        //    //FindNearsBrick();
+        //}
+        agent.SetDestination(targer.position);
     }
     //void FindNearsBrick()
     //{
@@ -52,25 +53,22 @@ public class AI : PLayer
     //    Block(Wall);
     //}
 
-    //void BlockAI()
-    //{
 
-    //}
     //protected void Block(GameObject Wall)
     //{
-       
+
     //    BoxCollider block = Wall.GetComponent<BoxCollider>();
-    //    if (block != null) 
+    //    if (block != null)
     //    {
-           
+
     //        block.enabled = false;
     //    }
     //}
-    //protected  void OnCollisionEnter(Collision collision)
+    //protected void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag("Wall"))
     //    {
-           
+
     //        if (Addbrick.Count > 0)
     //        {
     //            Debug.Log("1");
@@ -79,50 +77,50 @@ public class AI : PLayer
     //    }
 
     //}
-    protected void EatBrickAI()
-    {
-        EatBrick();
-    }
-    protected void LostBrickAI(GameObject bricObject)
-    {
-        LostBrick(bricObject);
-    }
+    //protected void EatBrickAI()
+    //{
+    //    EatBrick();
+    //}
+    //protected void LostBrickAI(GameObject bricObject)
+    //{
+    //    LostBrick(bricObject);
+    //}
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
+    //protected override void OnTriggerEnter(Collider other)
+    //{
+    //    base.OnTriggerEnter(other);
 
-        if (other.gameObject.tag == "Black")
-        {
+    //    if (other.gameObject.tag == "Black")
+    //    {
 
-            EatBrick();
-            // Xóa khỏi danh sách nếu tồn tại
-            if (Addbrick.Contains(other.gameObject))
-            {
-                Addbrick.Remove(other.gameObject);
-            }
-            Destroy(other.gameObject);
-            //FindNearsBrick();
-        }
+    //        EatBrick();
+    //        // Xóa khỏi danh sách nếu tồn tại
+    //        //if (Addbrick.Contains(other.gameObject))
+    //        //{
+    //        //    Addbrick.Remove(other.gameObject);
+    //        //}
+    //        Destroy(other.gameObject);
+    //        //FindNearsBrick();
+    //    }
 
 
-        else if (other.gameObject.tag == null)
-        {
-            return;
+    //    else if (other.gameObject.tag == null)
+    //    {
+    //        return;
 
-        }
+    //    }
 
-        if (other.gameObject.tag == "MyBrick")
-        {
-            if (Addbrick.Count > 0)
-            {
-                other.GetComponent<MeshRenderer>().material = mas;
-                LostBrick(other.gameObject);
-            }
+    //    if (other.gameObject.tag == "MyBrick")
+    //    {
+    //        if (Addbrick.Count > 0)
+    //        {
+    //            other.GetComponent<MeshRenderer>().material = mas;
+    //            LostBrick(other.gameObject);
+    //        }
 
-        }
+    //    }
 
-    }
+    //}
     //  protected override void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag("Wall"))
@@ -138,55 +136,4 @@ public class AI : PLayer
 }
 
 
-//public class AI : PLayer
-//{
-//    private NavMeshAgent agent;
-//    public Transform target;  // Không dùng target này nữa
-//    public float searchRadius = 10f; // Bán kính tìm gạch
 
-//    void Start()
-//    {
-//        agent = GetComponent<NavMeshAgent>();
-//    }
-
-//    void Update()
-//    {
-//        if (agent != null && agent.isOnNavMesh)
-//        {
-//            FindNearestBrick(); // Tìm viên gạch gần nhất
-//        }
-//    }
-
-//    void FindNearestBrick()
-//    {
-//        GameObject[] bricks = GameObject.FindGameObjectsWithTag("Black"); // Tìm tất cả gạch trên bản đồ
-//        GameObject nearestBrick = null;
-//        float minDistance = Mathf.Infinity;
-
-//        foreach (GameObject brick in bricks)
-//        {
-//            float distance = Vector3.Distance(transform.position, brick.transform.position);
-//            if (distance < minDistance && distance <= searchRadius)
-//            {
-//                minDistance = distance;
-//                nearestBrick = brick;
-//            }
-//        }
-
-//        if (nearestBrick != null)
-//        {
-//            agent.SetDestination(nearestBrick.transform.position);
-//        }
-//    }
-
-//    protected void OnTriggerEnter(Collider other)
-//    {
-//        base.OnTriggerEnter(other);
-//        if (other.gameObject.CompareTag("Green"))
-//        {
-//            EatBrick();
-//            Destroy(other.gameObject);
-//            FindNearestBrick(); // Sau khi ăn gạch, tìm viên gạch tiếp theo
-//        }
-//    }
-//}
